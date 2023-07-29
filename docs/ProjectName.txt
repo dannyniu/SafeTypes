@@ -1,0 +1,6 @@
+2023-07-13:
+
+This project was renamed from RCDT to SafeType. Identifiers' prefix
+had also been changed from ``rcdt'' to ``st''.
+
+RCDT stood for "reference counted data types".
