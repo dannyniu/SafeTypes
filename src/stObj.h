@@ -115,9 +115,11 @@ stObj_t *stObjKeep(stObj_t *obj); // ``++keptcnt''.
 void stObjRelease(stObj_t *obj); // ``--refcnt''.
 void stObjLeave(stObj_t *obj); // ``--keptcnt''.
 
-// This function simply invokes ``finalf''.
-// Therefore implementations shouldn't
-// call this super function.
+// Called by "sub-classes". It's not intended for users.
+void stObjFinalSuper(stObj_t *obj);
+
+// This function is intended for users.
+// It calls ``finalf'', which in turn calls ``stObjFinalSuper''.
 void stObjFinal(stObj_t *obj);
 
 #endif /* SafeTypes_Obj_H */

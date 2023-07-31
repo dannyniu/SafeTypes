@@ -435,4 +435,8 @@ void stDictFinal(stDict_t *dict)
     {
         stDict_FreeMember(dict->root.members + i);
     }
+
+    memset((uint8_t *)dict + sizeof(stObj_t), 0,
+           sizeof(stDict_t) - sizeof(stObj_t));
+    stObjFinalSuper(&dict->hdrObj);
 }

@@ -2,7 +2,7 @@
 
 optimize=debug
 testfunc() {
-    lldb \
+    #lldb \
         $exec
 }
 

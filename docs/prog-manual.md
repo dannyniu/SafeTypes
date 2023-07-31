@@ -12,7 +12,7 @@ There are 2 recommended ways to create objects
 1. declare a typed pointer and allocate its space from heap like this:
 
 ```
-st{SpecificType}_t *x = calloc(1, st{SpecificType}_t);
+st{SpecificType}_t *x = calloc(1, sizeof(st{SpecificType}_t));
 st{SpecificType}Init(x, ...);
 
 ...  using the object ...

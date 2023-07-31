@@ -116,6 +116,11 @@ void stObjLeave(stObj_t *obj)
     stObj_MayDoRelease(obj);
 }
 
+void stObjFinalSuper(stObj_t *obj)
+{
+    memset(obj, 0, sizeof(stObj_t));
+}
+
 void stObjFinal(stObj_t *obj)
 {
     obj->finalf(obj);

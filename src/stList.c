@@ -342,4 +342,8 @@ void stListFinal(stList_t *list)
         M = M->next;
         free(L);
     }
+
+    memset((uint8_t *)list + sizeof(stObj_t), 0,
+           sizeof(stList_t) - sizeof(stObj_t));
+    stObjFinalSuper(&list->hdrObj);
 }

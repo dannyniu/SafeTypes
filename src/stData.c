@@ -60,4 +60,7 @@ int stDataTrunc(stData_t *ctx, size_t len)
 void stDataFinal(stData_t *ctx)
 {
     free(ctx->buf);
+    memset((uint8_t *)ctx + sizeof(stObj_t), 0,
+           sizeof(stData_t) - sizeof(stObj_t));
+    stObjFinalSuper(&ctx->hdrObj);
 }
