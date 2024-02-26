@@ -181,7 +181,7 @@ int stListIterate(stList_t *list)
     if( list->cursor != &list->anch_tail )
     {
         list->hdrObj.iterp = list->cursor->value;
-        list->hdrObj.iterk.i = (++ list->pos);
+        list->hdrObj.iterk.i = (list->pos ++);
         list->cursor = list->cursor->next;
     }
     else

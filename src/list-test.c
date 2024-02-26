@@ -81,6 +81,11 @@ int main(void)
             printf("List Enumeration Encountered Wrong Value: %ld != %d.\n",
                    *(long *)v->buf, i), fails ++;
         }
+        if( x.hdrObj.iterk.i != i )
+        {
+            printf("List Enumeration Encountered Wrong Index: %ld != %d.\n",
+                   x.hdrObj.iterk.i, i), fails ++;
+        }
     }
 
     stListSeek(&x, 0, ST_LIST_SEEK_SET);
