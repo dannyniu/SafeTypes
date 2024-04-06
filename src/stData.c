@@ -25,7 +25,13 @@ size_t stDataLen(stData_t const *ctx)
 
 void *stDataMap(stData_t *ctx, size_t offset, size_t len)
 {
-    if( offset      >= ctx->len ) return NULL;
+    // 2024-03-27:
+    // Back-ported from SafeTypes2.
+    //
+    // 2024-03-26:
+    // The first check *was*: ``offset >= ctx->len''.
+    // This caused a bit of surprise for codes in the real world.
+    if( offset       > ctx->len ) return NULL;
     if( offset + len > ctx->len ) return NULL;
 
     ctx->mapcnt++;
