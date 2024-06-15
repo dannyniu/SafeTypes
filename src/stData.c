@@ -48,6 +48,11 @@ int stDataUnmap(stData_t *ctx)
 
 int stDataTrunc(stData_t *ctx, size_t len)
 {
+    // 2024-06-15:
+    // Although error reporting through return values are preferred,
+    // errno is chosen for this function, as one of the subroutines
+    // it invokes already use errno to report errors.
+
     void *tmp;
     
     if( ctx->mapcnt > 0 )

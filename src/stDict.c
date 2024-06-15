@@ -3,6 +3,14 @@
 #include "stDict.h"
 #include "siphash.h"
 
+// 2024-06-15:
+// The "TODO: errno" comments are altogether removed.
+// According to Single Unix Specification, Rationales
+// Volume, System Interfaces General Information, Error
+// Numbers, it is more preferable that new functions
+// report errors through return values, and this is
+// the approach taken in SafeTypes.
+
 typedef void (*rcdt_destructor_func)(void *);
 
 static uint8_t key_siphash[16];
@@ -89,7 +97,7 @@ int stDictGet(stDict_t *dict, stData_t *key, stObj_t **out)
         case st_dict_member_collision:
             if( ++level < ST_DICT_HASH_MAX ) T = M->nested; else
             {
-                // TODO: errno.
+                *out = NULL;
                 return st_access_error;
             }
             break;
@@ -97,7 +105,6 @@ int stDictGet(stDict_t *dict, stData_t *key, stObj_t **out)
 
         default:
             *out = NULL;
-            // TODO: errno.
             return st_access_error;
             break;
         }
@@ -145,14 +152,12 @@ int stDictUnset(stDict_t *dict, stData_t *key)
         case st_dict_member_collision:
             if( ++level < ST_DICT_HASH_MAX ) T = M->nested; else
             {
-                // TODO: errno.
                 return st_access_error;
             }
             break;
 
 
         default:
-            // TODO: errno.
             return st_access_error;
             break;
         }
@@ -219,7 +224,6 @@ int stDictSet(stDict_t *dict, stData_t *key, stObj_t *value, int semantic)
             {
                 if( ++level >= ST_DICT_HASH_MAX )
                 {
-                    // TODO: errno.
                     stDataUnmap(M->key);
                     return st_access_error;
                     /* NOTREACHED */
@@ -271,13 +275,11 @@ int stDictSet(stDict_t *dict, stData_t *key, stObj_t *value, int semantic)
         case st_dict_member_collision:
             if( ++level < ST_DICT_HASH_MAX ) T = M->nested; else
             {
-                // TODO: errno.
                 return st_access_error;
             }
             break;
 
         default:
-            // TODO: errno.
             return st_access_error;
             break;
         }
@@ -410,7 +412,6 @@ static void stDict_FreeMember(struct st_dict_member *m)
         break;
             
     default:
-        // TODO: errno.
         break;
     }
 }
